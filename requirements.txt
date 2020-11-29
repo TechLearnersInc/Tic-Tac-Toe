@@ -1,0 +1,11 @@
+PyOpenGL
+PyOpenGL_accelerate
+yapf
+xlrd
+xlwt
+numpy
+matplotlib
+yellowbrick
+seaborn
+pandas
+scikit-learn
