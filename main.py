@@ -111,6 +111,7 @@ def main():
     # Set the display callback.  You can set other callbacks for the keyboard and mouse events.
     glutDisplayFunc(display)
 
+    # Keyboard
     glutKeyboardFunc(Keyboard_Down)
     glutKeyboardUpFunc(Keyboard_Up)
 
