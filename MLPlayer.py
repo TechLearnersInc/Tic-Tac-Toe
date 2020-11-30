@@ -31,7 +31,7 @@ def main():
             temp_state = board_state.copy()
             temp_state[index] = 1
             temp_X = data_frame_convert(temp_state)
-            score = (classifier.predict_proba(temp_X))[0][1]
+            score = tuple(classifier.predict_proba(temp_X))[0][1]
             computer_win[index] = score
 
     user_win_max = user_win.get(max(user_win))
