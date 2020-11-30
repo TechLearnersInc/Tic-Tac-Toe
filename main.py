@@ -4,8 +4,11 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 
 from gui.BoardLines import BoardLines
-from gui.LetterO import LetterX
-from gui.LetterO import LetterO
+from gui.LetterO import (LetterO, LETTER_O_ONE_POSITION, LETTER_O_TWO_POSITION,
+                         LETTER_O_THREE_POSITION, LETTER_O_FOUR_POSITION,
+                         LETTER_O_FIVE_POSITION, LETTER_O_SIX_POSITION,
+                         LETTER_O_SEVEN_POSITION, LETTER_O_EIGHT_POSITION,
+                         LETTER_O_NINE_POSITION)
 
 
 # Display
@@ -32,14 +35,37 @@ def initialize():
     glClear(GL_COLOR_BUFFER_BIT)
 
 
-def keyboard_down(key: bytes, x: int, y: int):
+# Keyboard Down
+def Keyboard_Down(key: bytes, x: int, y: int):
     key: str = key.decode("utf-8")
     print(f"Down \"{key}\"")
 
 
-def keyboard_up(key: bytes, x: int, y: int):
+# Keyboard Up
+def Keyboard_Up(key: bytes, x: int, y: int):
     key: str = key.decode("utf-8")
-    print(f"UP \"{key}\"")
+    if key == '1':
+        LetterO(LETTER_O_ONE_POSITION)
+    elif key == '2':
+        LetterO(LETTER_O_TWO_POSITION)
+    elif key == '3':
+        LetterO(LETTER_O_THREE_POSITION)
+    elif key == '4':
+        LetterO(LETTER_O_FOUR_POSITION)
+    elif key == '5':
+        LetterO(LETTER_O_FIVE_POSITION)
+    elif key == '6':
+        LetterO(LETTER_O_SIX_POSITION)
+    elif key == '7':
+        LetterO(LETTER_O_SEVEN_POSITION)
+    elif key == '8':
+        LetterO(LETTER_O_EIGHT_POSITION)
+    elif key == '9':
+        LetterO(LETTER_O_NINE_POSITION)
+    else:
+        print(f"UP \"{key}\"")
+
+    glutSwapBuffers()
 
 
 # Main
@@ -65,8 +91,8 @@ def main():
     # Set the display callback.  You can set other callbacks for the keyboard and mouse events.
     glutDisplayFunc(display)
 
-    glutKeyboardFunc(keyboard_down)
-    glutKeyboardUpFunc(keyboard_up)
+    glutKeyboardFunc(Keyboard_Down)
+    glutKeyboardUpFunc(Keyboard_Up)
 
     # Reshape
     glutReshapeFunc(reshape)
