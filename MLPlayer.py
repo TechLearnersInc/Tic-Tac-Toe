@@ -5,8 +5,10 @@ import pandas as pd
 
 
 def dataFrameConvert(boardData: list):
-    columns: tuple = ("ROW_1_1", "ROW_1_2", "ROW_1_3", "ROW_2_1", "ROW_2_2",
-                      "ROW_2_3", "ROW_3_1", "ROW_3_2", "ROW_3_3")
+    columns: list = [
+        "ROW_1_1", "ROW_1_2", "ROW_1_3", "ROW_2_1", "ROW_2_2", "ROW_2_3",
+        "ROW_3_1", "ROW_3_2", "ROW_3_3"
+    ]
     board: dict = dict()
     for i in range(len(columns)):
         board[columns[i]] = [boardData[i]]
@@ -44,8 +46,7 @@ def GameStatus(board_state: list):
     return status
 
 
-def NextMove():
-    board_state = [0, 2, 1, 2, 0, 2, 2, 2, 2]
+def NextMove(board_state: list):
     classifier = joblib.load("tic-tac-toe.joblib.dat")
     user_win = dict()
     computer_win = dict()
