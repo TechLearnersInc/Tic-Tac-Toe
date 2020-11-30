@@ -2,14 +2,18 @@ import joblib
 import numpy as np
 import xgboost
 import pandas as pd
+import operator
 """
 0 => Human
 1 => Computer
 2 => Blank
 """
 
+# (np.array(X_test)).reshape(1, -1)
+
 
 def dataFrameConvert(boardData: list):
+    return (np.array(boardData)).reshape(1, -1)
     columns: list = [
         "ROW_1_1", "ROW_1_2", "ROW_1_3", "ROW_2_1", "ROW_2_2", "ROW_2_3",
         "ROW_3_1", "ROW_3_2", "ROW_3_3"
@@ -24,32 +28,33 @@ def NextMove(board_state: list):
     classifier = joblib.load("tic-tac-toe.joblib.dat")
     user_win = dict()
     computer_win = dict()
-
+    print(board_state)
     for index, element in enumerate(board_state):
         if element == 2:
             temp_state = board_state.copy()
             temp_state[index] = 0
             temp_X = dataFrameConvert(temp_state)
-            score = 1 - (classifier.predict_proba(temp_X))[0][1]
-            user_win[index] = score
+            score = tuple(classifier.predict_proba(temp_X))[0][1]
+            user_win[index] = 1 - score
 
     for index, element in enumerate(board_state):
         if element == 2:
             temp_state = board_state.copy()
             temp_state[index] = 1
+            print(temp_state)
             temp_X = dataFrameConvert(temp_state)
             score = tuple(classifier.predict_proba(temp_X))[0][1]
             computer_win[index] = score
 
-    user_win_max = user_win.get(max(user_win))
-    # print(user_win_max)
-    computer_win_max = computer_win.get(max(computer_win))
-    # print(computer_win_max)
+    user_win_max = max(user_win.items(), key=operator.itemgetter(1))[0]
+    print(user_win_max)
+    computer_win_max = max(computer_win.items(), key=operator.itemgetter(1))[0]
+    print(computer_win_max)
 
-    if user_win_max > computer_win_max:
-        return max(user_win)
+    if user_win.get(user_win_max) > computer_win.get(computer_win_max):
+        return user_win_max
     else:
-        return max(computer_win)
+        return computer_win_max
 
 
 def GameStatus(board_state: list):

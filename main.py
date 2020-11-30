@@ -104,7 +104,9 @@ def Keyboard_Up(key: bytes, x: int, y: int):
         BOARD_STATE[COMPUTER] = 1
         LetterO(LetterO_State_Change(COMPUTER + 1))
 
-    print(BOARD_STATE)
+    print(BOARD_STATE[0], BOARD_STATE[1], BOARD_STATE[2])
+    print(BOARD_STATE[3], BOARD_STATE[4], BOARD_STATE[5])
+    print(BOARD_STATE[6], BOARD_STATE[7], BOARD_STATE[8])
 
     glutSwapBuffers()
 
