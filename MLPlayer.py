@@ -35,7 +35,7 @@ def NextMove(board_state: list):
             temp_state[index] = 0
             temp_X = dataFrameConvert(temp_state)
             score = tuple(classifier.predict_proba(temp_X))[0][1]
-            user_win[index] = 1 - score
+            user_win[index] = score
 
     for index, element in enumerate(board_state):
         if element == 2:
@@ -46,12 +46,16 @@ def NextMove(board_state: list):
             score = tuple(classifier.predict_proba(temp_X))[0][1]
             computer_win[index] = score
 
-    user_win_max = max(user_win.items(), key=operator.itemgetter(1))[0]
+    user_win_max = min(user_win.items(), key=operator.itemgetter(1))[0]
     print(user_win_max)
     computer_win_max = max(computer_win.items(), key=operator.itemgetter(1))[0]
     print(computer_win_max)
 
-    if user_win.get(user_win_max) > computer_win.get(computer_win_max):
+    # if user_win.get(user_win_max) > computer_win.get(computer_win_max):
+    #     return user_win_max
+    # else:
+    #     return computer_win_max
+    if user_win.get(user_win_max) <= 0.5:
         return user_win_max
     else:
         return computer_win_max
