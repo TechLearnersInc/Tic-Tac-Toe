@@ -15,37 +15,6 @@ def dataFrameConvert(boardData: list):
     return pd.DataFrame(data=board, columns=columns)
 
 
-def GameStatus(board_state: list):
-    status = {'Winner': None, 'Cells': None}
-
-    if (board_state[0] == board_state[1] == board_state[2]) == (1 or 0):
-        status['Winner'] = board_state[1]
-        status['Cells'] = [0, 1, 2]
-    elif (board_state[3] == board_state[4] == board_state[5]) == (1 or 0):
-        status['Winner'] = board_state[4]
-        status['Cells'] = [3, 4, 5]
-    elif (board_state[6] == board_state[7] == board_state[8]) == (1 or 0):
-        status['Winner'] = board_state[7]
-        status['Cells'] = [6, 7, 8]
-    elif (board_state[0] == board_state[3] == board_state[6]) == (1 or 0):
-        status['Winner'] = board_state[3]
-        status['Cells'] = [0, 3, 6]
-    elif (board_state[1] == board_state[4] == board_state[7]) == (1 or 0):
-        status['Winner'] = board_state[4]
-        status['Cells'] = [1, 4, 7]
-    elif (board_state[2] == board_state[5] == board_state[8]) == (1 or 0):
-        status['Winner'] = board_state[5]
-        status['Cells'] = [2, 5, 8]
-    elif (board_state[0] == board_state[4] == board_state[8]) == (1 or 0):
-        status['Winner'] = board_state[4]
-        status['Cells'] = [0, 4, 8]
-    elif (board_state[2] == board_state[4] == board_state[6]) == (1 or 0):
-        status['Winner'] = board_state[4]
-        status['Cells'] = [0, 4, 6]
-
-    return status
-
-
 def NextMove(board_state: list):
     classifier = joblib.load("tic-tac-toe.joblib.dat")
     user_win = dict()
@@ -76,6 +45,37 @@ def NextMove(board_state: list):
         return max(user_win)
     else:
         return max(computer_win)
+
+
+def GameStatus(board_state: list):
+    status = {'Winner': None, 'Cells': None}
+
+    if (board_state[0] == board_state[1] == board_state[2]) == (1 or 0):
+        status['Winner'] = board_state[1]
+        status['Cells'] = [0, 1, 2]
+    elif (board_state[3] == board_state[4] == board_state[5]) == (1 or 0):
+        status['Winner'] = board_state[4]
+        status['Cells'] = [3, 4, 5]
+    elif (board_state[6] == board_state[7] == board_state[8]) == (1 or 0):
+        status['Winner'] = board_state[7]
+        status['Cells'] = [6, 7, 8]
+    elif (board_state[0] == board_state[3] == board_state[6]) == (1 or 0):
+        status['Winner'] = board_state[3]
+        status['Cells'] = [0, 3, 6]
+    elif (board_state[1] == board_state[4] == board_state[7]) == (1 or 0):
+        status['Winner'] = board_state[4]
+        status['Cells'] = [1, 4, 7]
+    elif (board_state[2] == board_state[5] == board_state[8]) == (1 or 0):
+        status['Winner'] = board_state[5]
+        status['Cells'] = [2, 5, 8]
+    elif (board_state[0] == board_state[4] == board_state[8]) == (1 or 0):
+        status['Winner'] = board_state[4]
+        status['Cells'] = [0, 4, 8]
+    elif (board_state[2] == board_state[4] == board_state[6]) == (1 or 0):
+        status['Winner'] = board_state[4]
+        status['Cells'] = [0, 4, 6]
+
+    return status
 
 
 if __name__ == '__main__':
