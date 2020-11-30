@@ -47,9 +47,9 @@ def NextMove(board_state: list):
             computer_win[index] = score
 
     user_win_max = min(user_win.items(), key=operator.itemgetter(1))[0]
-    print(user_win_max)
+    print(computer_win)
     computer_win_max = max(computer_win.items(), key=operator.itemgetter(1))[0]
-    print(computer_win_max)
+    print(user_win)
 
     # if user_win.get(user_win_max) > computer_win.get(computer_win_max):
     #     return user_win_max
