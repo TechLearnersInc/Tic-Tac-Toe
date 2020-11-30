@@ -4,6 +4,11 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 
 from gui.BoardLines import BoardLines
+from gui.LetterX import (LetterX, LETTER_X_ONE_POSITION, LETTER_X_TWO_POSITION,
+                         LETTER_X_THREE_POSITION, LETTER_X_FOUR_POSITION,
+                         LETTER_X_FIVE_POSITION, LETTER_X_SIX_POSITION,
+                         LETTER_X_SEVEN_POSITION, LETTER_X_EIGHT_POSITION,
+                         LETTER_X_NINE_POSITION)
 from gui.LetterO import (LetterO, LETTER_O_ONE_POSITION, LETTER_O_TWO_POSITION,
                          LETTER_O_THREE_POSITION, LETTER_O_FOUR_POSITION,
                          LETTER_O_FIVE_POSITION, LETTER_O_SIX_POSITION,
@@ -11,7 +16,7 @@ from gui.LetterO import (LetterO, LETTER_O_ONE_POSITION, LETTER_O_TWO_POSITION,
                          LETTER_O_NINE_POSITION)
 
 # Global Variable
-KEY_STATE: dict = {
+BOARD_STATE: dict = {
     '1': True,
     '2': True,
     '3': True,
@@ -56,30 +61,30 @@ def Keyboard_Down(key: bytes, x: int, y: int):
 
 # Keyboard Up
 def Keyboard_Up(key: bytes, x: int, y: int):
-    global KEY_STATE
+    global BOARD_STATE
     key: str = key.decode("utf-8")
 
-    if key == '1' and KEY_STATE.get(key):
+    if key == '1' and BOARD_STATE.get(key):
         LetterO(LETTER_O_ONE_POSITION)
         print(f"UP \"{key}\"")
-    elif key == '2' and KEY_STATE.get(key):
+    elif key == '2' and BOARD_STATE.get(key):
         LetterO(LETTER_O_TWO_POSITION)
-    elif key == '3' and KEY_STATE.get(key):
+    elif key == '3' and BOARD_STATE.get(key):
         LetterO(LETTER_O_THREE_POSITION)
-    elif key == '4' and KEY_STATE.get(key):
+    elif key == '4' and BOARD_STATE.get(key):
         LetterO(LETTER_O_FOUR_POSITION)
-    elif key == '5' and KEY_STATE.get(key):
+    elif key == '5' and BOARD_STATE.get(key):
         LetterO(LETTER_O_FIVE_POSITION)
-    elif key == '6' and KEY_STATE.get(key):
+    elif key == '6' and BOARD_STATE.get(key):
         LetterO(LETTER_O_SIX_POSITION)
-    elif key == '7' and KEY_STATE.get(key):
+    elif key == '7' and BOARD_STATE.get(key):
         LetterO(LETTER_O_SEVEN_POSITION)
-    elif key == '8' and KEY_STATE.get(key):
+    elif key == '8' and BOARD_STATE.get(key):
         LetterO(LETTER_O_EIGHT_POSITION)
-    elif key == '9' and KEY_STATE.get(key):
+    elif key == '9' and BOARD_STATE.get(key):
         LetterO(LETTER_O_NINE_POSITION)
 
-    KEY_STATE[key] = False
+    BOARD_STATE[key] = False
     glutSwapBuffers()
 
 
