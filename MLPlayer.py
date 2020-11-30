@@ -23,7 +23,6 @@ def main():
             temp_state = board_state.copy()
             temp_state[index] = 0
             temp_X = data_frame_convert(temp_state)
-            # print(type(temp_X))
             score = 1 - (classifier.predict_proba(temp_X))[0][1]
             user_win[index] = score
 
