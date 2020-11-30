@@ -4,6 +4,8 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 
 from gui.BoardLines import BoardLines
+from gui.LetterO import LetterX
+from gui.LetterO import LetterO
 
 
 # Display
