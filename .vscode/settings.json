@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/home/rizwan/Tic-Tac-Toe/venv/bin/python3"
+    "python.pythonPath": "venv/bin/python",
+    "python.formatting.provider": "yapf"
 }
