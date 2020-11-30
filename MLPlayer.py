@@ -4,7 +4,7 @@ import xgboost
 import pandas as pd
 
 
-def dataFrameConvert(boardData):
+def dataFrameConvert(boardData: list):
     columns: tuple = ("ROW_1_1", "ROW_1_2", "ROW_1_3", "ROW_2_1", "ROW_2_2",
                       "ROW_2_3", "ROW_3_1", "ROW_3_2", "ROW_3_3")
     board: dict = dict()
