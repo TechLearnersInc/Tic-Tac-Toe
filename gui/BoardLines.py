@@ -1,7 +1,4 @@
-import sys
-
-from OpenGL.GL import *
-from OpenGL.GLUT import *
+from OpenGL import GL
 
 
 def BoardLines():
@@ -10,49 +7,49 @@ def BoardLines():
     distance: int = 3.5
     color: int = 0.35
 
-    glPushMatrix()
-    glColor3f(color, color, color)
+    GL.glPushMatrix()
+    GL.glColor3f(color, color, color)
 
-    glPushMatrix()
-    glTranslatef(distance, 0, 0)
-    glBegin(GL_QUADS)
-    glVertex2f(-x, -y)
-    glVertex2f(x, -y)
-    glVertex2f(x, y)
-    glVertex2f(-x, y)
-    glEnd()
-    glPopMatrix()
+    GL.glPushMatrix()
+    GL.glTranslatef(distance, 0, 0)
+    GL.glBegin(GL.GL_QUADS)
+    GL.glVertex2f(-x, -y)
+    GL.glVertex2f(x, -y)
+    GL.glVertex2f(x, y)
+    GL.glVertex2f(-x, y)
+    GL.glEnd()
+    GL.glPopMatrix()
 
-    glPushMatrix()
-    glTranslatef(-distance, 0, 0)
-    glBegin(GL_QUADS)
-    glVertex2f(-x, -y)
-    glVertex2f(x, -y)
-    glVertex2f(x, y)
-    glVertex2f(-x, y)
-    glEnd()
-    glPopMatrix()
+    GL.glPushMatrix()
+    GL.glTranslatef(-distance, 0, 0)
+    GL.glBegin(GL.GL_QUADS)
+    GL.glVertex2f(-x, -y)
+    GL.glVertex2f(x, -y)
+    GL.glVertex2f(x, y)
+    GL.glVertex2f(-x, y)
+    GL.glEnd()
+    GL.glPopMatrix()
 
-    glPushMatrix()
-    glTranslatef(0, distance, 0)
-    glBegin(GL_QUADS)
-    glVertex2f(-y, -x)
-    glVertex2f(y, -x)
-    glVertex2f(y, x)
-    glVertex2f(-y, x)
-    glEnd()
-    glPopMatrix()
+    GL.glPushMatrix()
+    GL.glTranslatef(0, distance, 0)
+    GL.glBegin(GL.GL_QUADS)
+    GL.glVertex2f(-y, -x)
+    GL.glVertex2f(y, -x)
+    GL.glVertex2f(y, x)
+    GL.glVertex2f(-y, x)
+    GL.glEnd()
+    GL.glPopMatrix()
 
-    glPushMatrix()
-    glTranslatef(0, -distance, 0)
-    glBegin(GL_QUADS)
-    glVertex2f(-y, -x)
-    glVertex2f(y, -x)
-    glVertex2f(y, x)
-    glVertex2f(-y, x)
-    glEnd()
-    glPopMatrix()
+    GL.glPushMatrix()
+    GL.glTranslatef(0, -distance, 0)
+    GL.glBegin(GL.GL_QUADS)
+    GL.glVertex2f(-y, -x)
+    GL.glVertex2f(y, -x)
+    GL.glVertex2f(y, x)
+    GL.glVertex2f(-y, x)
+    GL.glEnd()
+    GL.glPopMatrix()
 
-    glPopMatrix()
+    GL.glPopMatrix()
 
-    glFlush()
+    GL.glFlush()

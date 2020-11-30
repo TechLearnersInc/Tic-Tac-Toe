@@ -45,7 +45,7 @@ def main():
     glutInit(sys.argv)
 
     # Position the window's center
-    width = height = 400
+    width = height = 350
     glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - width) // 2,
                            (glutGet(GLUT_SCREEN_HEIGHT) - height) // 2)
     glutInitWindowSize(width, height)
@@ -55,7 +55,7 @@ def main():
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
 
     # Create a window, setting its title
-    glutCreateWindow('Flower Shape Circle')
+    glutCreateWindow('Tic-Tac-Toe')
 
     # Initialization
     initialize()
