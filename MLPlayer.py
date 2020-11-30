@@ -2,6 +2,11 @@ import joblib
 import numpy as np
 import xgboost
 import pandas as pd
+"""
+0 => Human
+1 => Computer
+2 => Blank
+"""
 
 
 def dataFrameConvert(boardData: list):
@@ -37,9 +42,9 @@ def NextMove(board_state: list):
             computer_win[index] = score
 
     user_win_max = user_win.get(max(user_win))
-    print(user_win_max)
+    # print(user_win_max)
     computer_win_max = computer_win.get(max(computer_win))
-    print(computer_win_max)
+    # print(computer_win_max)
 
     if user_win_max > computer_win_max:
         return max(user_win)

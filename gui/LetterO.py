@@ -1,17 +1,38 @@
 import math
 from OpenGL import GL
 
-LETTER_O_ONE_POSITION: dict = {'X': -7, 'Y': 7}
-LETTER_O_TWO_POSITION: dict = {'X': 0, 'Y': 7}
-LETTER_O_THREE_POSITION: dict = {'X': 7, 'Y': 7}
 
-LETTER_O_FOUR_POSITION: dict = {'X': -7, 'Y': 0}
-LETTER_O_FIVE_POSITION: dict = {'X': 0, 'Y': 0}
-LETTER_O_SIX_POSITION: dict = {'X': 7, 'Y': 0}
+def LetterO_State_Change(key: int):
+    LETTER_O_ONE_POSITION: dict = {'X': -7, 'Y': 7}
+    LETTER_O_TWO_POSITION: dict = {'X': 0, 'Y': 7}
+    LETTER_O_THREE_POSITION: dict = {'X': 7, 'Y': 7}
 
-LETTER_O_SEVEN_POSITION: dict = {'X': -7, 'Y': -7}
-LETTER_O_EIGHT_POSITION: dict = {'X': 0, 'Y': -7}
-LETTER_O_NINE_POSITION: dict = {'X': 7, 'Y': -7}
+    LETTER_O_FOUR_POSITION: dict = {'X': -7, 'Y': 0}
+    LETTER_O_FIVE_POSITION: dict = {'X': 0, 'Y': 0}
+    LETTER_O_SIX_POSITION: dict = {'X': 7, 'Y': 0}
+
+    LETTER_O_SEVEN_POSITION: dict = {'X': -7, 'Y': -7}
+    LETTER_O_EIGHT_POSITION: dict = {'X': 0, 'Y': -7}
+    LETTER_O_NINE_POSITION: dict = {'X': 7, 'Y': -7}
+
+    if key == 1:
+        return LETTER_O_ONE_POSITION
+    elif key == 2:
+        return LETTER_O_TWO_POSITION
+    elif key == 3:
+        return LETTER_O_THREE_POSITION
+    elif key == 4:
+        return LETTER_O_FOUR_POSITION
+    elif key == 5:
+        return LETTER_O_FIVE_POSITION
+    elif key == 6:
+        return LETTER_O_SIX_POSITION
+    elif key == 7:
+        return LETTER_O_SEVEN_POSITION
+    elif key == 8:
+        return LETTER_O_EIGHT_POSITION
+    elif key == 9:
+        return LETTER_O_NINE_POSITION
 
 
 def LetterO(position: dict = {'X': 0, 'Y': 0}):

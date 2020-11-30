@@ -1,32 +1,16 @@
 import sys
+from time import sleep
 
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 
 from gui.BoardLines import BoardLines
-from gui.LetterX import (LetterX, LETTER_X_ONE_POSITION, LETTER_X_TWO_POSITION,
-                         LETTER_X_THREE_POSITION, LETTER_X_FOUR_POSITION,
-                         LETTER_X_FIVE_POSITION, LETTER_X_SIX_POSITION,
-                         LETTER_X_SEVEN_POSITION, LETTER_X_EIGHT_POSITION,
-                         LETTER_X_NINE_POSITION)
-from gui.LetterO import (LetterO, LETTER_O_ONE_POSITION, LETTER_O_TWO_POSITION,
-                         LETTER_O_THREE_POSITION, LETTER_O_FOUR_POSITION,
-                         LETTER_O_FIVE_POSITION, LETTER_O_SIX_POSITION,
-                         LETTER_O_SEVEN_POSITION, LETTER_O_EIGHT_POSITION,
-                         LETTER_O_NINE_POSITION)
+from gui.LetterO import LetterO, LetterO_State_Change
+from gui.LetterX import LetterX, LetterX_State_Change
+from MLPlayer import GameStatus, NextMove
 
 # Global Variable
-BOARD_STATE: dict = {
-    '1': True,
-    '2': True,
-    '3': True,
-    '4': True,
-    '5': True,
-    '6': True,
-    '7': True,
-    '8': True,
-    '9': True
-}
+BOARD_STATE: list = [2, 2, 2, 2, 2, 2, 2, 2, 2]
 
 
 # Display
@@ -62,29 +46,66 @@ def Keyboard_Down(key: bytes, x: int, y: int):
 # Keyboard Up
 def Keyboard_Up(key: bytes, x: int, y: int):
     global BOARD_STATE
-    key: str = key.decode("utf-8")
+    key: int = int(key.decode("utf-8"))
 
-    if key == '1' and BOARD_STATE.get(key):
-        LetterO(LETTER_O_ONE_POSITION)
-        print(f"UP \"{key}\"")
-    elif key == '2' and BOARD_STATE.get(key):
-        LetterO(LETTER_O_TWO_POSITION)
-    elif key == '3' and BOARD_STATE.get(key):
-        LetterO(LETTER_O_THREE_POSITION)
-    elif key == '4' and BOARD_STATE.get(key):
-        LetterO(LETTER_O_FOUR_POSITION)
-    elif key == '5' and BOARD_STATE.get(key):
-        LetterO(LETTER_O_FIVE_POSITION)
-    elif key == '6' and BOARD_STATE.get(key):
-        LetterO(LETTER_O_SIX_POSITION)
-    elif key == '7' and BOARD_STATE.get(key):
-        LetterO(LETTER_O_SEVEN_POSITION)
-    elif key == '8' and BOARD_STATE.get(key):
-        LetterO(LETTER_O_EIGHT_POSITION)
-    elif key == '9' and BOARD_STATE.get(key):
-        LetterO(LETTER_O_NINE_POSITION)
+    if key == 1 and BOARD_STATE[key - 1] == 2:
+        LetterX(LetterX_State_Change(key))
+        BOARD_STATE[key - 1] = 0
+        COMPUTER: int = NextMove(BOARD_STATE)
+        BOARD_STATE[COMPUTER] = 1
+        LetterO(LetterO_State_Change(COMPUTER + 1))
+    elif key == 2 and BOARD_STATE[key - 1] == 2:
+        LetterX(LetterX_State_Change(key))
+        BOARD_STATE[key - 1] = 0
+        COMPUTER: int = NextMove(BOARD_STATE)
+        print(COMPUTER)
+        BOARD_STATE[COMPUTER] = 1
+        LetterO(LetterO_State_Change(COMPUTER + 1))
+    elif key == 3 and BOARD_STATE[key - 1] == 2:
+        LetterX(LetterX_State_Change(key))
+        BOARD_STATE[key - 1] = 0
+        COMPUTER: int = NextMove(BOARD_STATE)
+        BOARD_STATE[COMPUTER] = 1
+        LetterO(LetterO_State_Change(COMPUTER + 1))
+    elif key == 4 and BOARD_STATE[key - 1] == 2:
+        LetterX(LetterX_State_Change(key))
+        BOARD_STATE[key - 1] = 0
+        COMPUTER: int = NextMove(BOARD_STATE)
+        BOARD_STATE[COMPUTER] = 1
+        LetterO(LetterO_State_Change(COMPUTER + 1))
+    elif key == 5 and BOARD_STATE[key - 1] == 2:
+        LetterX(LetterX_State_Change(key))
+        BOARD_STATE[key - 1] = 0
+        COMPUTER: int = NextMove(BOARD_STATE)
+        BOARD_STATE[COMPUTER] = 1
+        LetterO(LetterO_State_Change(COMPUTER + 1))
+    elif key == 6 and BOARD_STATE[key - 1] == 2:
+        LetterX(LetterX_State_Change(key))
+        BOARD_STATE[key - 1] = 0
+        COMPUTER: int = NextMove(BOARD_STATE)
+        BOARD_STATE[COMPUTER] = 1
+        LetterO(LetterO_State_Change(COMPUTER + 1))
+    elif key == 7 and BOARD_STATE[key - 1] == 2:
+        LetterX(LetterX_State_Change(key))
+        BOARD_STATE[key - 1] = 0
+        COMPUTER: int = NextMove(BOARD_STATE)
+        BOARD_STATE[COMPUTER] = 1
+        LetterO(LetterO_State_Change(COMPUTER + 1))
+    elif key == 8 and BOARD_STATE[key - 1] == 2:
+        LetterX(LetterX_State_Change(key))
+        BOARD_STATE[key - 1] = 0
+        COMPUTER: int = NextMove(BOARD_STATE)
+        BOARD_STATE[COMPUTER] = 1
+        LetterO(LetterO_State_Change(COMPUTER + 1))
+    elif key == 9 and BOARD_STATE[key - 1] == 2:
+        LetterX(LetterX_State_Change(key))
+        BOARD_STATE[key - 1] = 0
+        COMPUTER: int = NextMove(BOARD_STATE)
+        BOARD_STATE[COMPUTER] = 1
+        LetterO(LetterO_State_Change(COMPUTER + 1))
 
-    BOARD_STATE[key] = False
+    print(BOARD_STATE)
+
     glutSwapBuffers()
 
 
@@ -123,6 +144,3 @@ def main():
 
     # Run the GLUT main loop until the user closes the window.
     glutMainLoop()
-
-
-
