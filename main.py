@@ -13,11 +13,33 @@ from MLPlayer import GameStatus, NextMove
 BOARD_STATE: list = [2 for _ in range(9)]
 KEY_PRESSED: bool = False
 PRESSED_KEY: bytes = bytes()
+GAME_STATUS: bool = True
+
+
+# Game Reset
+def GameReset():
+    global BOARD_STATE, KEY_PRESSED, PRESSED_KEY, GAME_STATUS
+
+    BOARD_STATE = [2 for _ in range(9)]
+    KEY_PRESSED = False
+    PRESSED_KEY = bytes()
+    GAME_STATUS = True
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glutPostRedisplay()
 
 
 # GamePlay
 def GamePlay():
-    global BOARD_STATE, KEY_PRESSED, PRESSED_KEY
+    global BOARD_STATE, KEY_PRESSED, PRESSED_KEY, GAME_STATUS
+
+    if KEY_PRESSED and PRESSED_KEY.decode("utf-8") == 'r':
+        GameReset()
+        return
+
+    if GAME_STATUS is False:
+        print('Game Finished')
+        return
 
     if KEY_PRESSED:
         key: int = int(PRESSED_KEY.decode("utf-8"))
