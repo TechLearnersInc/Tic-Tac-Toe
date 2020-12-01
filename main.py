@@ -106,6 +106,11 @@ def reshape(w: GLsizei, h: GLsizei):
     glMatrixMode(GL_MODELVIEW)
 
 
+def timer(value):
+    # glutPostRedisplay()
+    glutTimerFunc(1000 // 60, timer, 0)
+
+
 # Initialization
 def initialize():
     glClearColor(28 / 255, 170 / 255, 156 / 255, 1.0)
@@ -159,7 +164,7 @@ def main():
     glutReshapeFunc(reshape)
 
     # Timer
-    # glutTimerFunc(1000, timer, 0)
+    glutTimerFunc(1000, timer, 0)
 
     # Run the GLUT main loop until the user closes the window.
     glutMainLoop()
