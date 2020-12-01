@@ -64,3 +64,7 @@ def LetterX(position: dict):
 
     GL.glPopMatrix()
     GL.glFlush()
+
+
+if __name__ == '__main__':
+    print("Hello World")
