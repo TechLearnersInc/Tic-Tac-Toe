@@ -1,7 +1,7 @@
 from OpenGL import GL
 from OpenGL import GLUT
 
-BOARD_LINE_X: float = 0.2  # Perfect in 0.2
+BOARD_LINE_X: float = 0.25  # Perfect in 0.2
 BOARD_LINE_Y: float = 10  # Perfect in 10
 BOARD_PLACEMENT: float = 0  # Perfect in 3.5
 BOARD_PLACEMENT_CHANGE_RATE: float = 0.1

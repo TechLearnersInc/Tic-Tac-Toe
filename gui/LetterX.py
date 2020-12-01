@@ -1,4 +1,5 @@
 from OpenGL import GL
+from OpenGL import GLUT
 
 
 def LetterX_State_Change(key: int):
@@ -36,11 +37,11 @@ def LetterX_State_Change(key: int):
 
 def LetterX(position: dict):
     x: int = 0.2
-    y: int = 3.0
+    y: int = 2.8
 
     GL.glPushMatrix()
     GL.glTranslatef(position.get('X'), position.get('Y'), 0)
-    GL.glColor3f(0.05, 0.70, 0.87)  # 0.7, 0.7, 0
+    GL.glColor3ub(70, 70, 70)
 
     GL.glPushMatrix()
     GL.glRotatef(45, 5, 1, -10)

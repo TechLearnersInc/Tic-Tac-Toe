@@ -39,14 +39,14 @@ def LetterO(position: dict = {'X': 0, 'Y': 0}):
     GL.glPushMatrix()
 
     GL.glTranslatef(position.get('X'), position.get('Y'), 0)
-    GL.glColor3f(0.95, 0.07, 0.46)  #  0.7, 0.7, 0
-    GL.glPointSize(3)
+    GL.glColor3ub(238, 238, 238)
+    GL.glPointSize(4)
 
     GL.glBegin(GL.GL_POINTS)
     for i in range(1000):
         GL.glVertex3f(
-            math.cos(2 * math.pi * (i / 1000)) * 2.5,
-            math.sin(2 * math.pi * (i / 1000)) * 2.5, 0)
+            math.cos(2 * math.pi * (i / 1000)) * 2.1,
+            math.sin(2 * math.pi * (i / 1000)) * 2.1, 0)
 
     GL.glEnd()
 
