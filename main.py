@@ -4,7 +4,7 @@ from time import sleep
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 
-from gui.BoardLines import BoardLines
+from gui.BoardLines import BoardLines, BoardLinesTimer
 from gui.LetterO import LetterO, LetterO_State_Change
 from gui.LetterX import LetterX, LetterX_State_Change
 from MLPlayer import GameStatus, NextMove
@@ -106,21 +106,25 @@ def reshape(w: GLsizei, h: GLsizei):
     glMatrixMode(GL_MODELVIEW)
 
 
+# Timer
 def timer(value):
-    # glutPostRedisplay()
     glutTimerFunc(1000 // 60, timer, 0)
+
+    if BoardLinesTimer():
+        GLUT.glutPostRedisplay()
 
 
 # Initialization
 def initialize():
-    glClearColor(28 / 255, 170 / 255, 156 / 255, 1.0)
+    glClearColor(28 / 255, 170 / 255, 156 / 255, 1)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
 
-# # Keyboard Down
-# def Keyboard_DOWN(key: bytes, x: int, y: int):
-#     key: str = key.decode("utf-8")
-#     print(f"Down \"{key}\"")
+# Keyboard Down
+def Keyboard_DOWN(key: bytes, x: int, y: int):
+    # key: str = key.decode("utf-8")
+    # print(f"Down \"{key}\"")
+    pass
 
 
 # Keyboard Up
@@ -157,8 +161,8 @@ def main():
     glutDisplayFunc(display)
 
     # Keyboard
-    # glutKeyboardFunc(Keyboard_DOWN)
     glutKeyboardUpFunc(Keyboard_UP)
+    glutKeyboardFunc(Keyboard_DOWN)
 
     # Reshape
     glutReshapeFunc(reshape)
