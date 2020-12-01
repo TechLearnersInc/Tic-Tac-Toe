@@ -40,7 +40,7 @@ def LetterX(position: dict):
 
     GL.glPushMatrix()
     GL.glTranslatef(position.get('X'), position.get('Y'), 0)
-    GL.glColor3f(0.7, 0.7, 0)
+    GL.glColor3f(0.05, 0.70, 0.87)  # 0.7, 0.7, 0
 
     GL.glPushMatrix()
     GL.glRotatef(45, 5, 1, -10)
