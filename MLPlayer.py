@@ -53,6 +53,7 @@ def NextMove(board_state: list):
 
     temp_state = board_state.copy()
     temp_state[computer_win_max] = 1
+
     if GameStatus(temp_state)['Winner'] == 1:
         return computer_win_max
 
@@ -65,7 +66,8 @@ def NextMove(board_state: list):
 def GameStatus(board_state: list):
     status = {'Winner': None, 'Cells': None}
 
-    if (board_state[0] == board_state[1] == board_state[2])  and (board_state[0] == 0 or board_state[0] == 1):
+    if (board_state[0] == board_state[1] ==
+            board_state[2]) and (board_state[0] == 0 or board_state[0] == 1):
         status['Winner'] = board_state[1]
         status['Cells'] = [0, 1, 2]
     elif (board_state[3] == board_state[4] ==
