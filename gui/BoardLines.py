@@ -2,13 +2,12 @@ from OpenGL import GL
 
 
 def BoardLines():
-    x: int = 0.1
+    x: int = 0.2
     y: int = 10
-    color: int = 0.35
     placement: int = 3.5
 
     GL.glPushMatrix()
-    GL.glColor3f(color, color, color)
+    GL.glColor3ub(23, 145, 135)
 
     GL.glPushMatrix()
     GL.glTranslatef(placement, 0, 0)

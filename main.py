@@ -33,7 +33,7 @@ def reshape(w: GLsizei, h: GLsizei):
 
 # Initialization
 def initialize():
-    glClearColor(0.2, 0.2, 0.2, 1.0)
+    glClearColor(28 / 255, 170 / 255, 156 / 255, 1.0)
     glClear(GL_COLOR_BUFFER_BIT)
 
 
@@ -116,7 +116,7 @@ def main():
     glutInit(sys.argv)
 
     # Position the window's center
-    width = height = 350
+    width = height = 512
     glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - width) // 2,
                            (glutGet(GLUT_SCREEN_HEIGHT) - height) // 2)
     glutInitWindowSize(width, height)
