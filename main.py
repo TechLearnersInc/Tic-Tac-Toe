@@ -10,44 +10,22 @@ from gui.LetterX import LetterX, LetterX_State_Change
 from MLPlayer import GameStatus, NextMove
 
 # Global Variable
-BOARD_STATE: list = [2, 2, 2, 2, 2, 2, 2, 2, 2]
+BOARD_STATE: list = [2 for _ in range(9)]
+KEY_PRESSED: bool = False
+PRESSED_KEY: bytes = bytes()
 
 
-# Display
-def display():
-    glClear(GL_COLOR_BUFFER_BIT)
+# GamePlay
+def GamePlay():
+    global BOARD_STATE, KEY_PRESSED, PRESSED_KEY
 
-    BoardLines()
+    if KEY_PRESSED:
+        key: int = int(PRESSED_KEY.decode("utf-8"))
+        KEY_PRESSED = False
+    else:
+        return
 
     glutSwapBuffers()
-
-
-# Reshaping
-def reshape(w: GLsizei, h: GLsizei):
-    glViewport(0, 0, w, h)
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity()
-    glOrtho(-10, 10, -10, 10, -10, 10)
-    glMatrixMode(GL_MODELVIEW)
-
-
-# Initialization
-def initialize():
-    glClearColor(28 / 255, 170 / 255, 156 / 255, 1.0)
-    glClear(GL_COLOR_BUFFER_BIT)
-
-
-# Keyboard Down
-def Keyboard_Down(key: bytes, x: int, y: int):
-    key: str = key.decode("utf-8")
-    print(f"Down \"{key}\"")
-
-
-# Keyboard Up
-def Keyboard_Up(key: bytes, x: int, y: int):
-    global BOARD_STATE
-    key: int = int(key.decode("utf-8"))
-
     if key == 1 and BOARD_STATE[key - 1] == 2:
         LetterX(LetterX_State_Change(key))
         BOARD_STATE[key - 1] = 0
@@ -108,7 +86,46 @@ def Keyboard_Up(key: bytes, x: int, y: int):
     print(BOARD_STATE[3], BOARD_STATE[4], BOARD_STATE[5])
     print(BOARD_STATE[6], BOARD_STATE[7], BOARD_STATE[8])
 
+
+# Display
+def display():
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+    BoardLines()
+    GamePlay()
+
     glutSwapBuffers()
+
+
+# Reshaping
+def reshape(w: GLsizei, h: GLsizei):
+    glViewport(0, 0, w, h)
+    glMatrixMode(GL_PROJECTION)
+    glLoadIdentity()
+    glOrtho(-10, 10, -10, 10, -10, 10)
+    glMatrixMode(GL_MODELVIEW)
+
+
+# Initialization
+def initialize():
+    glClearColor(28 / 255, 170 / 255, 156 / 255, 1.0)
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+
+# # Keyboard Down
+# def Keyboard_DOWN(key: bytes, x: int, y: int):
+#     key: str = key.decode("utf-8")
+#     print(f"Down \"{key}\"")
+
+
+# Keyboard Up
+def Keyboard_UP(key: bytes, x: int, y: int):
+    global KEY_PRESSED, PRESSED_KEY
+    KEY_PRESSED = True
+    PRESSED_KEY = key
+    print(f"Up \"{key}\"")
+
+    glutPostRedisplay()
 
 
 # Main
@@ -116,7 +133,7 @@ def main():
     glutInit(sys.argv)
 
     # Position the window's center
-    width = height = 512
+    width = height = 400
     glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - width) // 2,
                            (glutGet(GLUT_SCREEN_HEIGHT) - height) // 2)
     glutInitWindowSize(width, height)
@@ -135,8 +152,8 @@ def main():
     glutDisplayFunc(display)
 
     # Keyboard
-    glutKeyboardFunc(Keyboard_Down)
-    glutKeyboardUpFunc(Keyboard_Up)
+    # glutKeyboardFunc(Keyboard_DOWN)
+    glutKeyboardUpFunc(Keyboard_UP)
 
     # Reshape
     glutReshapeFunc(reshape)
@@ -149,4 +166,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print("Hello World")
+    main()
