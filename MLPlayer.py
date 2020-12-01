@@ -9,8 +9,6 @@ import operator
 2 => Blank
 """
 
-# (np.array(X_test)).reshape(1, -1)
-
 
 def dataFrameConvert(boardData: list):
     return (np.array(boardData)).reshape(1, -1)
