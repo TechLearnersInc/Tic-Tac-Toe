@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "venv/bin/python",
+    "python.pythonPath": "/home/inan/anaconda3/bin/python",
     "python.formatting.provider": "yapf"
 }
