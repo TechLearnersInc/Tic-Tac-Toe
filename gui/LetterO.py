@@ -45,8 +45,8 @@ def LetterO(position: dict = {'X': 0, 'Y': 0}):
     GL.glBegin(GL.GL_POINTS)
     for i in range(1000):
         GL.glVertex3f(
-            math.cos(2 * math.pi * i / 1000) * 2.2,
-            math.sin(2 * math.pi * i / 1000) * 2.2, 0)
+            math.cos(2 * math.pi *( i / 1000)) * 2.5,
+            math.sin(2 * math.pi * (i / 1000)) * 2.5, 0)
 
     GL.glEnd()
     GL.glFlush()
