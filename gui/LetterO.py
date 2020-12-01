@@ -52,3 +52,7 @@ def LetterO(position: dict = {'X': 0, 'Y': 0}):
     GL.glFlush()
 
     GL.glPopMatrix()
+
+
+if __name__ == '__main__':
+    print("Hello World")

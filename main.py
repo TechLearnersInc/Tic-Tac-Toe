@@ -146,3 +146,7 @@ def main():
 
     # Run the GLUT main loop until the user closes the window.
     glutMainLoop()
+
+
+if __name__ == '__main__':
+    print("Hello World")
