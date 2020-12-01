@@ -27,6 +27,17 @@ def NextMove(board_state: list):
     user_win = dict()
     computer_win = dict()
     print(board_state)
+
+    if sum(board_state) == 16:
+        if board_state[0] == 0:
+            return 4
+        elif board_state[2] == 0:
+            return 4
+        elif board_state[6] == 0:
+            return 4
+        elif board_state[8] == 0:
+            return 4
+
     for index, element in enumerate(board_state):
         if element == 2:
             temp_state = board_state.copy()
