@@ -108,7 +108,7 @@ def reshape(width: GLsizei, height: GLsizei):
 
 # Timer
 def timer(_: int):
-    global GAME_STATUS, WINDOWS_TITLE
+    global GAME_STATUS
 
     glutTimerFunc(1000 // 60, timer, 0)
 
