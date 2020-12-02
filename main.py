@@ -124,8 +124,8 @@ def display():
 
 
 # Reshaping
-def reshape(w: GLsizei, h: GLsizei):
-    glViewport(0, 0, w, h)
+def reshape(width: GLsizei, height: GLsizei):
+    glViewport(0, 0, width, height)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
     glOrtho(-10, 10, -10, 10, -10, 10)
@@ -133,11 +133,11 @@ def reshape(w: GLsizei, h: GLsizei):
 
 
 # Timer
-def timer(value):
+def timer(_: int):
     glutTimerFunc(1000 // 60, timer, 0)
 
     if BoardLinesTimer(reset=False):
-        GLUT.glutPostRedisplay()
+        glutPostRedisplay()
 
 
 # Initialization
@@ -178,7 +178,7 @@ def main():
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
 
     # Create a window, setting its title
-    glutCreateWindow('Tic-Tac-Toe')
+    glutCreateWindow('Tic Tac Toe')
 
     # Initialization
     initialize()
