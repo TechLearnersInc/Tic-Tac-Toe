@@ -1,5 +1,6 @@
 import sys
 from time import sleep
+from threading import Thread
 
 from OpenGL.GL import *
 from OpenGL.GLUT import *
@@ -26,11 +27,16 @@ def GameReset():
     GAME_STATUS = True
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+    BoardLines()
+    BoardLinesTimer(reset=True)
+
     glutPostRedisplay()
 
 
 # GamePlay
 def GamePlay():
+
     global BOARD_STATE, KEY_PRESSED, PRESSED_KEY, GAME_STATUS
 
     if KEY_PRESSED and PRESSED_KEY.decode("utf-8") == 'r':
@@ -48,70 +54,42 @@ def GamePlay():
         return
 
     glutSwapBuffers()
-    if key == 1 and BOARD_STATE[key - 1] == 2:
-        LetterX(LetterX_State_Change(key))
-        BOARD_STATE[key - 1] = 0
-        COMPUTER: int = NextMove(BOARD_STATE)
-        BOARD_STATE[COMPUTER] = 1
-        LetterO(LetterO_State_Change(COMPUTER + 1))
-    elif key == 2 and BOARD_STATE[key - 1] == 2:
-        LetterX(LetterX_State_Change(key))
-        BOARD_STATE[key - 1] = 0
-        COMPUTER: int = NextMove(BOARD_STATE)
-        print(COMPUTER)
-        BOARD_STATE[COMPUTER] = 1
-        LetterO(LetterO_State_Change(COMPUTER + 1))
-    elif key == 3 and BOARD_STATE[key - 1] == 2:
-        LetterX(LetterX_State_Change(key))
-        BOARD_STATE[key - 1] = 0
-        COMPUTER: int = NextMove(BOARD_STATE)
-        BOARD_STATE[COMPUTER] = 1
-        LetterO(LetterO_State_Change(COMPUTER + 1))
-    elif key == 4 and BOARD_STATE[key - 1] == 2:
-        LetterX(LetterX_State_Change(key))
-        BOARD_STATE[key - 1] = 0
-        COMPUTER: int = NextMove(BOARD_STATE)
-        BOARD_STATE[COMPUTER] = 1
-        LetterO(LetterO_State_Change(COMPUTER + 1))
-    elif key == 5 and BOARD_STATE[key - 1] == 2:
-        LetterX(LetterX_State_Change(key))
-        BOARD_STATE[key - 1] = 0
-        COMPUTER: int = NextMove(BOARD_STATE)
-        BOARD_STATE[COMPUTER] = 1
-        LetterO(LetterO_State_Change(COMPUTER + 1))
-    elif key == 6 and BOARD_STATE[key - 1] == 2:
-        LetterX(LetterX_State_Change(key))
-        BOARD_STATE[key - 1] = 0
-        COMPUTER: int = NextMove(BOARD_STATE)
-        BOARD_STATE[COMPUTER] = 1
-        LetterO(LetterO_State_Change(COMPUTER + 1))
-    elif key == 7 and BOARD_STATE[key - 1] == 2:
-        LetterX(LetterX_State_Change(key))
-        BOARD_STATE[key - 1] = 0
-        COMPUTER: int = NextMove(BOARD_STATE)
-        BOARD_STATE[COMPUTER] = 1
-        LetterO(LetterO_State_Change(COMPUTER + 1))
-    elif key == 8 and BOARD_STATE[key - 1] == 2:
-        LetterX(LetterX_State_Change(key))
-        BOARD_STATE[key - 1] = 0
-        COMPUTER: int = NextMove(BOARD_STATE)
-        BOARD_STATE[COMPUTER] = 1
-        LetterO(LetterO_State_Change(COMPUTER + 1))
-    elif key == 9 and BOARD_STATE[key - 1] == 2:
+
+    def KeyAction():
+        global BOARD_STATE
         LetterX(LetterX_State_Change(key))
         BOARD_STATE[key - 1] = 0
         COMPUTER: int = NextMove(BOARD_STATE)
         BOARD_STATE[COMPUTER] = 1
         LetterO(LetterO_State_Change(COMPUTER + 1))
 
-    print(BOARD_STATE[0], BOARD_STATE[1], BOARD_STATE[2])
-    print(BOARD_STATE[3], BOARD_STATE[4], BOARD_STATE[5])
-    print(BOARD_STATE[6], BOARD_STATE[7], BOARD_STATE[8])
+    if key == 1 and BOARD_STATE[key - 1] == 2:
+        KeyAction()
+    elif key == 2 and BOARD_STATE[key - 1] == 2:
+        KeyAction()
+    elif key == 3 and BOARD_STATE[key - 1] == 2:
+        KeyAction()
+    elif key == 4 and BOARD_STATE[key - 1] == 2:
+        KeyAction()
+    elif key == 5 and BOARD_STATE[key - 1] == 2:
+        KeyAction()
+    elif key == 6 and BOARD_STATE[key - 1] == 2:
+        KeyAction()
+    elif key == 7 and BOARD_STATE[key - 1] == 2:
+        KeyAction()
+    elif key == 8 and BOARD_STATE[key - 1] == 2:
+        KeyAction()
+    elif key == 9 and BOARD_STATE[key - 1] == 2:
+        KeyAction()
+
+    # print(BOARD_STATE[0], BOARD_STATE[1], BOARD_STATE[2])
+    # print(BOARD_STATE[3], BOARD_STATE[4], BOARD_STATE[5])
+    # print(BOARD_STATE[6], BOARD_STATE[7], BOARD_STATE[8])
 
 
 # Display
 def display():
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glClear(GL_COLOR_BUFFER_BIT)
 
     BoardLines()
     GamePlay()
@@ -120,8 +98,8 @@ def display():
 
 
 # Reshaping
-def reshape(w: GLsizei, h: GLsizei):
-    glViewport(0, 0, w, h)
+def reshape(width: GLsizei, height: GLsizei):
+    glViewport(0, 0, width, height)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
     glOrtho(-10, 10, -10, 10, -10, 10)
@@ -129,24 +107,29 @@ def reshape(w: GLsizei, h: GLsizei):
 
 
 # Timer
-def timer(value):
+def timer(_: int):
     glutTimerFunc(1000 // 60, timer, 0)
 
-    if BoardLinesTimer():
-        GLUT.glutPostRedisplay()
+    if BoardLinesTimer(reset=False):
+        glutPostRedisplay()
 
 
 # Initialization
 def initialize():
     glClearColor(28 / 255, 170 / 255, 156 / 255, 1)
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glClear(GL_COLOR_BUFFER_BIT)
 
 
 # Keyboard Down
 def Keyboard_DOWN(key: bytes, x: int, y: int):
+    global GAME_STATUS
     # key: str = key.decode("utf-8")
     # print(f"Down \"{key}\"")
-    pass
+    if GameStatus(BOARD_STATE).get('Winner') is not None:
+        GAME_STATUS = False
+        GameReset()
+    else:
+        GAME_STATUS = True
 
 
 # Keyboard Up
@@ -154,7 +137,7 @@ def Keyboard_UP(key: bytes, x: int, y: int):
     global KEY_PRESSED, PRESSED_KEY
     KEY_PRESSED = True
     PRESSED_KEY = key
-    print(f"Up \"{key}\"")
+    # print(f"Up \"{key}\"")
 
     glutPostRedisplay()
 
@@ -174,7 +157,7 @@ def main():
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
 
     # Create a window, setting its title
-    glutCreateWindow('Tic-Tac-Toe')
+    glutCreateWindow('Tic Tac Toe (You\'re X)')
 
     # Initialization
     initialize()

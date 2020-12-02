@@ -1,5 +1,4 @@
 from OpenGL import GL
-from OpenGL import GLUT
 
 BOARD_LINE_X: float = 0.25  # Perfect in 0.2
 BOARD_LINE_Y: float = 10  # Perfect in 10
@@ -62,9 +61,13 @@ def BoardLines():
     GL.glPopMatrix()
 
 
-def BoardLinesTimer():
+def BoardLinesTimer(reset: bool):
     global BOARD_PLACEMENT
     global BOARD_PLACEMENT_CHANGE_RATE
+
+    if reset:
+        BOARD_PLACEMENT = 0
+        return True
 
     if BOARD_PLACEMENT <= 3.5:
         BOARD_PLACEMENT += BOARD_PLACEMENT_CHANGE_RATE
