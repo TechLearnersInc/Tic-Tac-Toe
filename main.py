@@ -57,14 +57,14 @@ def GamePlay():
     glutSwapBuffers()
 
     def KeyAction():
-        try:
-            global BOARD_STATE
-            LetterX(LetterX_State_Change(key))
-            BOARD_STATE[key - 1] = 0
+        global BOARD_STATE
+        LetterX(LetterX_State_Change(key))
+        BOARD_STATE[key - 1] = 0
+        if 2 in BOARD_STATE:
             COMPUTER: int = NextMove(BOARD_STATE)
             BOARD_STATE[COMPUTER] = 1
             LetterO(LetterO_State_Change(COMPUTER + 1))
-        except ValueError as e:
+        else:
             GameReset()
 
     if key == 1 and BOARD_STATE[key - 1] == 2:
