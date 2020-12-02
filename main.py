@@ -82,9 +82,9 @@ def GamePlay():
     elif key == 9 and BOARD_STATE[key - 1] == 2:
         KeyAction()
 
-    print(BOARD_STATE[0], BOARD_STATE[1], BOARD_STATE[2])
-    print(BOARD_STATE[3], BOARD_STATE[4], BOARD_STATE[5])
-    print(BOARD_STATE[6], BOARD_STATE[7], BOARD_STATE[8])
+    # print(BOARD_STATE[0], BOARD_STATE[1], BOARD_STATE[2])
+    # print(BOARD_STATE[3], BOARD_STATE[4], BOARD_STATE[5])
+    # print(BOARD_STATE[6], BOARD_STATE[7], BOARD_STATE[8])
 
 
 # Display
@@ -108,17 +108,10 @@ def reshape(width: GLsizei, height: GLsizei):
 
 # Timer
 def timer(_: int):
-    global GAME_STATUS
-
     glutTimerFunc(1000 // 60, timer, 0)
 
     if BoardLinesTimer(reset=False):
         glutPostRedisplay()
-
-    if GameStatus(BOARD_STATE).get('Winner') is not None:
-        GAME_STATUS = False
-    else:
-        GAME_STATUS = True
 
 
 # Initialization
@@ -129,9 +122,14 @@ def initialize():
 
 # Keyboard Down
 def Keyboard_DOWN(key: bytes, x: int, y: int):
+    global GAME_STATUS
     # key: str = key.decode("utf-8")
     # print(f"Down \"{key}\"")
-    pass
+    if GameStatus(BOARD_STATE).get('Winner') is not None:
+        GAME_STATUS = False
+        GameReset()
+    else:
+        GAME_STATUS = True
 
 
 # Keyboard Up
@@ -139,7 +137,7 @@ def Keyboard_UP(key: bytes, x: int, y: int):
     global KEY_PRESSED, PRESSED_KEY
     KEY_PRESSED = True
     PRESSED_KEY = key
-    print(f"Up \"{key}\"")
+    # print(f"Up \"{key}\"")
 
     glutPostRedisplay()
 
