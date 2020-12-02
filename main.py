@@ -8,6 +8,7 @@ from OpenGL.GLUT import *
 from gui.BoardLines import BoardLines, BoardLinesTimer
 from gui.LetterO import LetterO, LetterO_State_Change
 from gui.LetterX import LetterX, LetterX_State_Change
+from gui.EndLines import EndLineDraw
 from MLPlayer import GameStatus, NextMove
 
 # Global Variable
@@ -93,6 +94,7 @@ def display():
 
     BoardLines()
     GamePlay()
+    EndLineDraw([6, 7, 8])
 
     glutSwapBuffers()
 
@@ -108,10 +110,17 @@ def reshape(width: GLsizei, height: GLsizei):
 
 # Timer
 def timer(_: int):
+    global BOARD_STATE, GAME_STATUS
     glutTimerFunc(1000 // 60, timer, 0)
 
     if BoardLinesTimer(reset=False):
         glutPostRedisplay()
+
+    if GameStatus(BOARD_STATE).get('Winner') is not None:
+        GAME_STATUS = False
+        GameReset()
+    else:
+        GAME_STATUS = True
 
 
 # Initialization
@@ -122,14 +131,9 @@ def initialize():
 
 # Keyboard Down
 def Keyboard_DOWN(key: bytes, x: int, y: int):
-    global GAME_STATUS
     # key: str = key.decode("utf-8")
     # print(f"Down \"{key}\"")
-    if GameStatus(BOARD_STATE).get('Winner') is not None:
-        GAME_STATUS = False
-        GameReset()
-    else:
-        GAME_STATUS = True
+    pass
 
 
 # Keyboard Up
