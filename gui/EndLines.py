@@ -17,9 +17,9 @@ def EndLineDraw(cells: list):
         x, y = y, x
         posY = -7
     elif cells == [0, 3, 6]:
-        posX = 0
+        posX = -7
     elif cells == [1, 4, 7]:
-        pass
+        posX = 0
     elif cells == [2, 5, 8]:
         posX = 7
     elif cells == [0, 4, 8]:
