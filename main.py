@@ -115,11 +115,15 @@ def timer(_: int):
     if BoardLinesTimer(reset=False):
         glutPostRedisplay()
 
-    if GameStatus(BOARD_STATE).get('Winner') is not None:
+    result: dict = GameStatus(BOARD_STATE)
+    if result.get('Winner') is not None:
+        EndLineDraw([2, 4, 6])
+        if GAME_STATUS is True:
+            glutSwapBuffers()
+            EndLineDraw(cells=result.get('Cells'))
+            glutSwapBuffers()
+            print('HEllo')
         GAME_STATUS = False
-        GameReset()
-    else:
-        GAME_STATUS = True
 
 
 # Initialization
