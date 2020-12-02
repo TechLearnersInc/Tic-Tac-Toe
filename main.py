@@ -26,6 +26,10 @@ def GameReset():
     GAME_STATUS = True
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+    BoardLines()
+    BoardLinesTimer(reset=True)
+
     glutPostRedisplay()
 
 
