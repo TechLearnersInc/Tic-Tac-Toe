@@ -61,7 +61,7 @@ def BoardLines():
     GL.glPopMatrix()
 
 
-def BoardLinesTimer(reset: bool = False):
+def BoardLinesTimer(reset: bool):
     global BOARD_PLACEMENT
     global BOARD_PLACEMENT_CHANGE_RATE
 

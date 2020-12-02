@@ -136,7 +136,7 @@ def reshape(w: GLsizei, h: GLsizei):
 def timer(value):
     glutTimerFunc(1000 // 60, timer, 0)
 
-    if BoardLinesTimer():
+    if BoardLinesTimer(reset=False):
         GLUT.glutPostRedisplay()
 
 
