@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
     "python.pythonPath": "C:\\Users\\SAKIB\\anaconda3\\envs\\Tic-Tac-Toe\\python.exe",
+=======
+    "python.pythonPath": "C:\\Users\\Rizwan\\Python37\\python.exe",
+>>>>>>> f583254b06dd7674ae2621c4fe2559200da1c91b
     "python.formatting.provider": "yapf"
 }
