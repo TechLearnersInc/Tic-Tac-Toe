@@ -37,6 +37,14 @@ def NextMove(board_state: list):
             return 4
         elif board_state[8] == 0:
             return 4
+        elif board_state[3] == 0:
+            return 5
+        elif board_state[1] == 0:
+            return 7
+        elif board_state[7] == 0:
+            return 1
+        elif board_state[5] == 0:
+            return 3
 
     for index, element in enumerate(board_state):
         if element == 2:
