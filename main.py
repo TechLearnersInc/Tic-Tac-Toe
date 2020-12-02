@@ -57,12 +57,15 @@ def GamePlay():
     glutSwapBuffers()
 
     def KeyAction():
-        global BOARD_STATE
-        LetterX(LetterX_State_Change(key))
-        BOARD_STATE[key - 1] = 0
-        COMPUTER: int = NextMove(BOARD_STATE)
-        BOARD_STATE[COMPUTER] = 1
-        LetterO(LetterO_State_Change(COMPUTER + 1))
+        try:
+            global BOARD_STATE
+            LetterX(LetterX_State_Change(key))
+            BOARD_STATE[key - 1] = 0
+            COMPUTER: int = NextMove(BOARD_STATE)
+            BOARD_STATE[COMPUTER] = 1
+            LetterO(LetterO_State_Change(COMPUTER + 1))
+        except ValueError as e:
+            GameReset()
 
     if key == 1 and BOARD_STATE[key - 1] == 2:
         KeyAction()
@@ -164,7 +167,7 @@ def main():
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
 
     # Create a window, setting its title
-    glutCreateWindow('Tic Tac Toe (You\'re X)')
+    glutCreateWindow('Tic Tac Toe')
 
     # Initialization
     initialize()
