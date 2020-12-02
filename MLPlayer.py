@@ -115,7 +115,7 @@ def GameStatus(board_state: list):
     elif (board_state[2] == board_state[4] ==
           board_state[6]) and (board_state[2] == 0 or board_state[2] == 1):
         status['Winner'] = board_state[4]
-        status['Cells'] = [0, 4, 6]
+        status['Cells'] = [2, 4, 6]
 
     return status
 

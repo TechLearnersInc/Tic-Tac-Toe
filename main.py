@@ -94,7 +94,6 @@ def display():
 
     BoardLines()
     GamePlay()
-    EndLineDraw([6, 7, 8])
 
     glutSwapBuffers()
 

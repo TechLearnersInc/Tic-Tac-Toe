@@ -4,8 +4,9 @@ from OpenGL import GL
 def EndLineDraw(cells: list):
     x: float = 0.3
     y: float = 9.3
-
-    posX = posY = 0
+    posX: int = 0
+    posY: int = 0
+    angle: int = 0
 
     if cells == [0, 1, 2]:
         x, y = y, x
@@ -16,22 +17,26 @@ def EndLineDraw(cells: list):
         x, y = y, x
         posY = -7
     elif cells == [0, 3, 6]:
-        pass
+        posX = 0
     elif cells == [1, 4, 7]:
         pass
     elif cells == [2, 5, 8]:
-        pass
+        posX = 7
     elif cells == [0, 4, 8]:
-        pass
-    elif cells == [0, 4, 6]:
-        pass
+        y = 12
+        angle = 45
+    elif cells == [2, 4, 6]:
+        y = 12
+        angle = -45
+    else:
+        return
 
     GL.glPushMatrix()
-    GL.glColor3ub(255, 0, 0)
+    GL.glColor3ub(69, 90, 100)
 
     GL.glPushMatrix()
     GL.glTranslatef(posX, posY, 0)
-    # GL.glRotatef(45, 1, 1, 20)
+    GL.glRotatef(angle, 1, 1, 20)
     GL.glBegin(GL.GL_QUADS)
     GL.glVertex2f(-x, -y)
     GL.glVertex2f(x, -y)

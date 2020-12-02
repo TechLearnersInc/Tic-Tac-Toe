@@ -16,7 +16,7 @@ def BoardLines():
     placement: float = BOARD_PLACEMENT
 
     GL.glPushMatrix()
-    GL.glColor3ub(23, 145, 135)
+    GL.glColor3ub(23, 145, 135) 
 
     GL.glPushMatrix()
     GL.glTranslatef(placement, 0, 0)
