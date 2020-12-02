@@ -26,10 +26,9 @@ def NextMove(board_state: list):
     classifier = joblib.load("tic-tac-toe.joblib.dat")
     user_win = dict()
     computer_win = dict()
+    print(board_state)
 
-    # print(board_state)
-
-    if sum(board_state) == 16:
+    if board_state[4] == 2:
         if board_state[0] == 0:
             return 4
         elif board_state[2] == 0:
@@ -38,7 +37,9 @@ def NextMove(board_state: list):
             return 4
         elif board_state[8] == 0:
             return 4
-        elif board_state[3] == 0:
+
+    if sum(board_state) == 16:
+        if board_state[3] == 0:
             return 5
         elif board_state[1] == 0:
             return 7
@@ -59,16 +60,15 @@ def NextMove(board_state: list):
         if element == 2:
             temp_state = board_state.copy()
             temp_state[index] = 1
-            # print(temp_state)
+            print(temp_state)
             temp_X = dataFrameConvert(temp_state)
             score = tuple(classifier.predict_proba(temp_X))[0][1]
             computer_win[index] = score
 
     user_win_max = min(user_win.items(), key=operator.itemgetter(1))[0]
+    print(computer_win)
     computer_win_max = max(computer_win.items(), key=operator.itemgetter(1))[0]
-
-    # print(computer_win)
-    # print(user_win)
+    print(user_win)
 
     temp_state = board_state.copy()
     temp_state[computer_win_max] = 1
