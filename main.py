@@ -19,7 +19,7 @@ BOARD_STATE: list = [2 for _ in range(9)]
 KEY_PRESSED: bool = False
 PRESSED_KEY: bytes = bytes()
 GAME_STATUS: bool = True
-CHECK_LINE_DRAWN: bool = False
+
 
 # Game Reset
 def GameReset():
@@ -48,6 +48,12 @@ def GamePlay():
         return
 
     if GAME_STATUS is False:
+        with open("GameRecords.csv", 'a') as file:
+            for _ in BOARD_STATE:
+                file.write(str(_) + ",")
+            file.write(str((GameStatus(BOARD_STATE))['Winner']))
+            file.write("\n")
+
         GameReset()
         print('Game Finished')
         return
@@ -71,7 +77,7 @@ def GamePlay():
             BOARD_STATE[COMPUTER] = 1
             LetterO(LetterO_State_Change(COMPUTER + 1))
         else:
-            GameReset()
+            GAME_STATUS = False
 
     if key == 1 and BOARD_STATE[key - 1] == 2:
         KeyAction()
@@ -130,7 +136,6 @@ def timer(_: int):
             glutSwapBuffers()
             EndLineDraw(cells=result.get('Cells'))
             glutSwapBuffers()
-            CHECK_LINE_DRAWN = True
         GAME_STATUS = False
 
 
