@@ -1,6 +1,6 @@
 import os
 import sys
-from time import sleep
+import sqlite3
 from threading import Thread
 
 from OpenGL.GL import *
@@ -47,16 +47,16 @@ def GamePlay():
         GameReset()
         return
 
-    if GAME_STATUS is False:
-        with open("GameRecords.csv", 'a') as file:
-            for _ in BOARD_STATE:
-                file.write(str(_) + ",")
-            file.write(str((GameStatus(BOARD_STATE))['Winner']))
-            file.write("\n")
+    # if GAME_STATUS is False:
+    #     with open("GameRecords.csv", 'a') as file:
+    #         for _ in BOARD_STATE:
+    #             file.write(str(_) + ",")
+    #         file.write(str((GameStatus(BOARD_STATE))['Winner']))
+    #         file.write("\n")
 
-        GameReset()
-        print('Game Finished')
-        return
+    #     GameReset()
+    #     print('Game Finished')
+    #     return
 
     if KEY_PRESSED:
         key: int = int(PRESSED_KEY.decode("utf-8"))
@@ -103,6 +103,17 @@ def GamePlay():
     # print(BOARD_STATE[6], BOARD_STATE[7], BOARD_STATE[8])
 
 
+# Winning Data Store
+def winningDataStore():
+    global BOARD_STATE
+    conn = sqlite3.connect('GameRecords.sqlite3')
+    cursor = conn.cursor()
+    query: str = f"INSERT INTO 'records' VALUES({', '.join([str(_) for _ in BOARD_STATE])}, '{str((GameStatus(BOARD_STATE))['Winner'])}');"
+    cursor.execute(query)
+    conn.commit()
+    conn.close()
+
+
 # Display
 def display():
     glClear(GL_COLOR_BUFFER_BIT)
@@ -136,6 +147,7 @@ def timer(_: int):
             glutSwapBuffers()
             EndLineDraw(cells=result.get('Cells'))
             glutSwapBuffers()
+            winningDataStore()
         GAME_STATUS = False
 
 
