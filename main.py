@@ -48,11 +48,11 @@ def GamePlay():
         return
 
     if GAME_STATUS is False:
-        with open("GameRecords.csv", 'a', encoding='utf-8') as file:
+        with open("GameRecords.csv", 'a') as file:
             for _ in BOARD_STATE:
                 file.write(str(_) + ",")
             file.write(str((GameStatus(BOARD_STATE))['Winner']))
-            file.write('\n')
+            file.write("\n")
 
         GameReset()
         print('Game Finished')
