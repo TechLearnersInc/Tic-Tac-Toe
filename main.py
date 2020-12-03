@@ -1,7 +1,6 @@
 import os
 import sys
 import sqlite3
-from threading import Thread
 
 from OpenGL.GL import *
 from OpenGL.GLUT import *
