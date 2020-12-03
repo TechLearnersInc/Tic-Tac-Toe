@@ -75,6 +75,8 @@ def GamePlay():
                 return
             BOARD_STATE[COMPUTER] = 1
             LetterO(LetterO_State_Change(COMPUTER + 1))
+            GameRecordStore(win=False)
+            print("g")
         else:
             GAME_STATUS = False
 
@@ -103,11 +105,14 @@ def GamePlay():
 
 
 # Winning Data Store
-def winningDataStore():
+def GameRecordStore(win: bool):
     global BOARD_STATE
     conn = sqlite3.connect('GameRecords.sqlite3')
     cursor = conn.cursor()
-    query: str = f"INSERT INTO 'records' VALUES({', '.join([str(_) for _ in BOARD_STATE])}, '{str((GameStatus(BOARD_STATE))['Winner'])}');"
+    if win:
+        query: str = f"INSERT INTO 'records' VALUES({', '.join([str(_) for _ in BOARD_STATE])}, '{str((GameStatus(BOARD_STATE))['Winner'])}');"
+    else:
+        query: str = f"INSERT INTO 'records' VALUES({', '.join([str(_) for _ in BOARD_STATE])}, 'STEP');"
     cursor.execute(query)
     conn.commit()
     conn.close()
@@ -146,7 +151,7 @@ def timer(_: int):
             glutSwapBuffers()
             EndLineDraw(cells=result.get('Cells'))
             glutSwapBuffers()
-            winningDataStore()
+            GameRecordStore(win=True)
         GAME_STATUS = False
 
 
