@@ -19,7 +19,7 @@ BOARD_STATE: list = [2 for _ in range(9)]
 KEY_PRESSED: bool = False
 PRESSED_KEY: bytes = bytes()
 GAME_STATUS: bool = True
-
+CHECK_LINE_DRAWN: bool = False
 
 # Game Reset
 def GameReset():
@@ -48,6 +48,7 @@ def GamePlay():
         return
 
     if GAME_STATUS is False:
+        GameReset()
         print('Game Finished')
         return
 
@@ -60,11 +61,13 @@ def GamePlay():
     glutSwapBuffers()
 
     def KeyAction():
-        global BOARD_STATE
+        global BOARD_STATE, GAME_STATUS
         LetterX(LetterX_State_Change(key))
         BOARD_STATE[key - 1] = 0
-        if 2 in BOARD_STATE:
+        if (2 in BOARD_STATE):
             COMPUTER: int = NextMove(BOARD_STATE)
+            if COMPUTER == -1:
+                return
             BOARD_STATE[COMPUTER] = 1
             LetterO(LetterO_State_Change(COMPUTER + 1))
         else:
@@ -127,6 +130,7 @@ def timer(_: int):
             glutSwapBuffers()
             EndLineDraw(cells=result.get('Cells'))
             glutSwapBuffers()
+            CHECK_LINE_DRAWN = True
         GAME_STATUS = False
 
 

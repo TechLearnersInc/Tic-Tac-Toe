@@ -9,10 +9,12 @@ import dataPreparator
 2 => Blank
 """
 
-JOBLIB_FILE: str = 'Tic-Tac-Toe-LG.joblib.dat'
+JOBLIB_FILE: str = 'tic-tac-toe.joblib.dat'
 
 
 def NextMove(board_state: list):
+    if GameStatus(board_state)['Winner'] != None:
+        return -1
     global JOBLIB_FILE
     classifier = joblib.load(JOBLIB_FILE)
     user_win = dict()
@@ -23,7 +25,7 @@ def NextMove(board_state: list):
         if element == 2:
             temp_state = board_state.copy()
             temp_state[index] = 0
-            temp_X = dataPreparator.dataFrameDummyVarConvert(temp_state)
+            temp_X = dataPreparator.dataFrameConvert(temp_state)
             score = tuple(classifier.predict_proba(temp_X))[0][1]
             user_win[index] = score
 
@@ -32,7 +34,7 @@ def NextMove(board_state: list):
             temp_state = board_state.copy()
             temp_state[index] = 1
             # print(temp_state)
-            temp_X = dataPreparator.dataFrameDummyVarConvert(temp_state)
+            temp_X = dataPreparator.dataFrameConvert(temp_state)
             score = tuple(classifier.predict_proba(temp_X))[0][1]
             computer_win[index] = score
 
@@ -58,15 +60,6 @@ def NextMove(board_state: list):
             elif board_state[8] == 0:
                 return 4
 
-    # # if sum(board_state) == 16:
-    # #     if board_state[3] == 0:
-    # #         return 5
-    # #     elif board_state[1] == 0:
-    # #         return 7
-    # #     elif board_state[7] == 0:
-    # #         return 1
-    # #     elif board_state[5] == 0:
-    # #         return 8
 
     if user_win.get(user_win_max) <= 0.5:
         return user_win_max
