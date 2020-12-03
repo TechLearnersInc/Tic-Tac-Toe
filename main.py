@@ -124,11 +124,9 @@ def timer(_: int):
     result: dict = GameStatus(BOARD_STATE)
     if result.get('Winner') is not None:
         if GAME_STATUS is True:
-            print(result.get('Cells'))
             glutSwapBuffers()
             EndLineDraw(cells=result.get('Cells'))
             glutSwapBuffers()
-            print('HEllo')
         GAME_STATUS = False
 
 
