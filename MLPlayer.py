@@ -56,24 +56,26 @@ def NextMove(board_state: list):
     if GameStatus(temp_state)['Winner'] == 1:
         return computer_win_max
 
-    if board_state[4] == 2:
-        if board_state[0] == 0:
-            return 4
-        elif board_state[2] == 0:
-            return 4
-        elif board_state[6] == 0:
-            return 4
-        elif board_state[8] == 0:
-            return 4
-    # if sum(board_state) == 16:
-    #     if board_state[3] == 0:
-    #         return 5
-    #     elif board_state[1] == 0:
-    #         return 7
-    #     elif board_state[7] == 0:
-    #         return 1
-    #     elif board_state[5] == 0:
-    #         return 3
+    if sum(board_state) == 16:
+        if board_state[4] == 2:
+            if board_state[0] == 0:
+                return 4
+            elif board_state[2] == 0:
+                return 4
+            elif board_state[6] == 0:
+                return 4
+            elif board_state[8] == 0:
+                return 4
+
+    # # if sum(board_state) == 16:
+    # #     if board_state[3] == 0:
+    # #         return 5
+    # #     elif board_state[1] == 0:
+    # #         return 7
+    # #     elif board_state[7] == 0:
+    # #         return 1
+    # #     elif board_state[5] == 0:
+    # #         return 8
 
     if user_win.get(user_win_max) <= 0.5:
         return user_win_max
