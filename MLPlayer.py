@@ -23,7 +23,7 @@ def dataFrameConvert(boardData: list):
 
 
 def NextMove(board_state: list):
-    classifier = joblib.load("tic-tac-toe.joblib.dat")
+    classifier = joblib.load("Tic-Tac-Toe.joblib.dat")
     user_win = dict()
     computer_win = dict()
     # print(board_state)
