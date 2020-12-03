@@ -36,7 +36,7 @@ def dataFrameDummyVarConvert(boardData: list):
 
     for rowNo in range(1, 4):
         for cellNo in range(1, 4):
-            board[f'ROW_{rowNo}_{cellNo}_{boardData[cellNo-1]}'] = 1
+            board[f'ROW_{rowNo}_{cellNo}_{boardData[cellNo-1]}'] = [1]
 
     return pd.DataFrame(data=board, columns=columns)
 
