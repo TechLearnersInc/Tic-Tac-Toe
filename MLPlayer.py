@@ -9,9 +9,12 @@ import dataPreparator
 2 => Blank
 """
 
+JOBLIB_FILE: str = 'Tic-Tac-Toe-LG.joblib.dat'
+
 
 def NextMove(board_state: list):
-    classifier = joblib.load("Tic-Tac-Toe-LG.joblib.dat")
+    global JOBLIB_FILE
+    classifier = joblib.load(JOBLIB_FILE)
     user_win = dict()
     computer_win = dict()
     # print(board_state)
