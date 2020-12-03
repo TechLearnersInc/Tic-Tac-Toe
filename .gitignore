@@ -1,9 +1,6 @@
 # Jupyter Notebook Checkpoints
 .ipynb_checkpoints/
 
-# VSCode
-.vscode/
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
