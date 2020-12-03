@@ -168,7 +168,7 @@ def main():
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
 
     # Create a window, setting its title
-    glutCreateWindow('Tic Tac Toe')
+    glutCreateWindow('Tic Tac Toe (You\'re X)')
 
     # Initialization
     initialize()

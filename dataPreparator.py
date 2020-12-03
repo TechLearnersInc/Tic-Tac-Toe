@@ -14,10 +14,12 @@ def dataFrameConvert(boardData: list):
         "ROW_1_1", "ROW_1_2", "ROW_1_3", "ROW_2_1", "ROW_2_2", "ROW_2_3",
         "ROW_3_1", "ROW_3_2", "ROW_3_3"
     ]
+
     board: dict = dict()
     for i in range(len(columns)):
         board[columns[i]] = [boardData[i]]
-    return pd.DataFrame(data=board, columns=columns)
+
+    return numpyConvert(pd.DataFrame(data=board, columns=columns))
 
 
 def dataFrameDummyVarConvert(boardData: list):
@@ -38,7 +40,7 @@ def dataFrameDummyVarConvert(boardData: list):
         for cellNo in range(1, 4):
             board[f'ROW_{rowNo}_{cellNo}_{boardData[cellNo-1]}'] = [1]
 
-    return pd.DataFrame(data=board, columns=columns)
+    return numpyConvert(pd.DataFrame(data=board, columns=columns))
 
 
 if __name__ == '__main__':
