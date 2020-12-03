@@ -2,7 +2,7 @@ import joblib
 import xgboost
 import pandas as pd
 import operator
-from dataPreparator import dataFrameConvert, dataFrameDummyVar
+import dataPreparator
 """
 0 => Human
 1 => Computer
@@ -11,7 +11,7 @@ from dataPreparator import dataFrameConvert, dataFrameDummyVar
 
 
 def NextMove(board_state: list):
-    classifier = joblib.load("Tic-Tac-Toe.joblib.dat")
+    classifier = joblib.load("Tic-Tac-Toe-LG.joblib.dat")
     user_win = dict()
     computer_win = dict()
     # print(board_state)
@@ -20,7 +20,7 @@ def NextMove(board_state: list):
         if element == 2:
             temp_state = board_state.copy()
             temp_state[index] = 0
-            temp_X = dataFrameConvert(temp_state)
+            temp_X = dataPreparator.dataFrameDummyVarConvert(temp_state)
             score = tuple(classifier.predict_proba(temp_X))[0][1]
             user_win[index] = score
 
@@ -29,7 +29,7 @@ def NextMove(board_state: list):
             temp_state = board_state.copy()
             temp_state[index] = 1
             # print(temp_state)
-            temp_X = dataFrameConvert(temp_state)
+            temp_X = dataPreparator.dataFrameDummyVarConvert(temp_state)
             score = tuple(classifier.predict_proba(temp_X))[0][1]
             computer_win[index] = score
 
