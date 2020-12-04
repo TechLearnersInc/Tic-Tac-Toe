@@ -46,16 +46,9 @@ def GamePlay():
         GameReset()
         return
 
-    # if GAME_STATUS is False:
-    #     with open("GameRecords.csv", 'a') as file:
-    #         for _ in BOARD_STATE:
-    #             file.write(str(_) + ",")
-    #         file.write(str((GameStatus(BOARD_STATE))['Winner']))
-    #         file.write("\n")
-
-    #     GameReset()
-    #     print('Game Finished')
-    #     return
+    if GAME_STATUS is False:
+        GameReset()
+        return
 
     if KEY_PRESSED:
         key: int = int(PRESSED_KEY.decode("utf-8"))
@@ -76,7 +69,6 @@ def GamePlay():
             BOARD_STATE[COMPUTER] = 1
             LetterO(LetterO_State_Change(COMPUTER + 1))
             GameRecordStore(win=False)
-            print("g")
         else:
             GAME_STATUS = False
 
