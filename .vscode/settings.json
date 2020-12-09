@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\Rizwan\\miniconda3\\envs\\tic-tac-toe\\python.exe",
+    "python.pythonPath": "c:\\Users\\Rizwan\\Documents\\Tic-Tac-Toe\\venv\\Scripts\\python.exe",
     "python.formatting.provider": "yapf"
 }
