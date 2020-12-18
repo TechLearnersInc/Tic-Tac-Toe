@@ -11,7 +11,7 @@ from gui.LetterX import LetterX, LetterX_State_Change
 from gui.EndLines import EndLineDraw
 from MLPlayer import GameStatus, NextMove
 
-os.system('cls')
+os.system("cls")
 
 # Global Variable
 BOARD_STATE: list = [2 for _ in range(9)]
@@ -42,7 +42,7 @@ def GamePlay():
 
     global BOARD_STATE, KEY_PRESSED, PRESSED_KEY, GAME_STATUS
 
-    if KEY_PRESSED and PRESSED_KEY.decode("utf-8") == 'r':
+    if KEY_PRESSED and PRESSED_KEY.decode("utf-8") == "r":
         GameReset()
         return
 
@@ -62,7 +62,7 @@ def GamePlay():
         global BOARD_STATE, GAME_STATUS
         LetterX(LetterX_State_Change(key))
         BOARD_STATE[key - 1] = 0
-        if (2 in BOARD_STATE):
+        if 2 in BOARD_STATE:
             COMPUTER: int = NextMove(BOARD_STATE)
             if COMPUTER == -1:
                 return
@@ -99,7 +99,7 @@ def GamePlay():
 # Winning Data Store
 def GameRecordStore(win: bool):
     global BOARD_STATE
-    conn = sqlite3.connect('GameRecords.sqlite3')
+    conn = sqlite3.connect("GameRecords.sqlite3")
     cursor = conn.cursor()
     if win:
         query: str = f"INSERT INTO 'records' VALUES({', '.join([str(_) for _ in BOARD_STATE])}, '{str((GameStatus(BOARD_STATE))['Winner'])}');"
@@ -138,10 +138,10 @@ def timer(_: int):
         glutPostRedisplay()
 
     result: dict = GameStatus(BOARD_STATE)
-    if result.get('Winner') is not None:
+    if result.get("Winner") is not None:
         if GAME_STATUS is True:
             glutSwapBuffers()
-            EndLineDraw(cells=result.get('Cells'))
+            EndLineDraw(cells=result.get("Cells"))
             glutSwapBuffers()
             GameRecordStore(win=True)
         GAME_STATUS = False
@@ -176,8 +176,10 @@ def main():
 
     # Position the window's center
     width = height = 400
-    glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - width) // 2,
-                           (glutGet(GLUT_SCREEN_HEIGHT) - height) // 2)
+    glutInitWindowPosition(
+        (glutGet(GLUT_SCREEN_WIDTH) - width) // 2,
+        (glutGet(GLUT_SCREEN_HEIGHT) - height) // 2,
+    )
     glutInitWindowSize(width, height)
 
     # Create a double-buffer RGBA window.   (Single-buffering is possible.
@@ -185,7 +187,7 @@ def main():
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
 
     # Create a window, setting its title
-    glutCreateWindow('Tic Tac Toe (You\'re X)')
+    glutCreateWindow("Tic Tac Toe (You're X)")
 
     # Initialization
     initialize()
@@ -207,5 +209,5 @@ def main():
     glutMainLoop()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
