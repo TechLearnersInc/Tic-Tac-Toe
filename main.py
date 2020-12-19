@@ -11,7 +11,6 @@ from gui.LetterX import LetterX, LetterX_State_Change
 from gui.EndLines import EndLineDraw
 from MLPlayer import GameStatus, NextMove
 
-os.system("cls")
 
 # Global Variable
 BOARD_STATE: list = [2 for _ in range(9)]
